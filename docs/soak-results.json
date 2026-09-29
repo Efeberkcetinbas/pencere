@@ -1,0 +1,228 @@
+{
+  "started": "2026-09-29T12:04:25.993Z",
+  "elapsed": 600270,
+  "errors": [],
+  "samples": [
+    {
+      "minute": 0,
+      "elapsed": 9,
+      "heap": 4210848,
+      "coffee": true,
+      "ui": 1,
+      "images": true,
+      "nodes": 67,
+      "animations": 32,
+      "heroLife": 1,
+      "birdLayers": 1,
+      "ferryLayers": 1,
+      "flowerAnimations": 2,
+      "characterAnimations": 1,
+      "voices": {
+        "created": 0,
+        "active": 0,
+        "max": 0
+      }
+    },
+    {
+      "minute": 1,
+      "elapsed": 60029,
+      "heap": 3469004,
+      "coffee": true,
+      "ui": 0,
+      "images": true,
+      "nodes": 67,
+      "animations": 33,
+      "heroLife": 1,
+      "birdLayers": 1,
+      "ferryLayers": 1,
+      "flowerAnimations": 2,
+      "characterAnimations": 1,
+      "voices": {
+        "created": 2,
+        "active": 2,
+        "max": 2
+      }
+    },
+    {
+      "minute": 2,
+      "elapsed": 120123,
+      "heap": 3522864,
+      "coffee": true,
+      "ui": 0,
+      "images": true,
+      "nodes": 67,
+      "animations": 33,
+      "heroLife": 1,
+      "birdLayers": 1,
+      "ferryLayers": 1,
+      "flowerAnimations": 2,
+      "characterAnimations": 1,
+      "voices": {
+        "created": 2,
+        "active": 2,
+        "max": 2
+      }
+    },
+    {
+      "minute": 3,
+      "elapsed": 180127,
+      "heap": 3505172,
+      "coffee": true,
+      "ui": 0,
+      "images": true,
+      "nodes": 67,
+      "animations": 34,
+      "heroLife": 1,
+      "birdLayers": 1,
+      "ferryLayers": 1,
+      "flowerAnimations": 2,
+      "characterAnimations": 1,
+      "voices": {
+        "created": 2,
+        "active": 2,
+        "max": 2
+      }
+    },
+    {
+      "minute": 4,
+      "elapsed": 240135,
+      "heap": 3357812,
+      "coffee": true,
+      "ui": 0,
+      "images": true,
+      "nodes": 67,
+      "animations": 32,
+      "heroLife": 1,
+      "birdLayers": 1,
+      "ferryLayers": 1,
+      "flowerAnimations": 2,
+      "characterAnimations": 1,
+      "voices": {
+        "created": 2,
+        "active": 2,
+        "max": 2
+      }
+    },
+    {
+      "minute": 5,
+      "elapsed": 300139,
+      "heap": 3345764,
+      "coffee": true,
+      "ui": 0,
+      "images": true,
+      "nodes": 67,
+      "animations": 33,
+      "heroLife": 1,
+      "birdLayers": 1,
+      "ferryLayers": 1,
+      "flowerAnimations": 2,
+      "characterAnimations": 1,
+      "voices": {
+        "created": 2,
+        "active": 2,
+        "max": 2
+      }
+    },
+    {
+      "minute": 6,
+      "elapsed": 360149,
+      "heap": 3330924,
+      "coffee": true,
+      "ui": 0,
+      "images": true,
+      "nodes": 67,
+      "animations": 33,
+      "heroLife": 1,
+      "birdLayers": 1,
+      "ferryLayers": 1,
+      "flowerAnimations": 2,
+      "characterAnimations": 1,
+      "voices": {
+        "created": 2,
+        "active": 2,
+        "max": 2
+      }
+    },
+    {
+      "minute": 7,
+      "elapsed": 420160,
+      "heap": 3356496,
+      "coffee": true,
+      "ui": 0,
+      "images": true,
+      "nodes": 67,
+      "animations": 34,
+      "heroLife": 1,
+      "birdLayers": 1,
+      "ferryLayers": 1,
+      "flowerAnimations": 2,
+      "characterAnimations": 1,
+      "voices": {
+        "created": 2,
+        "active": 2,
+        "max": 2
+      }
+    },
+    {
+      "minute": 8,
+      "elapsed": 480163,
+      "heap": 3332868,
+      "coffee": true,
+      "ui": 0,
+      "images": true,
+      "nodes": 67,
+      "animations": 34,
+      "heroLife": 1,
+      "birdLayers": 1,
+      "ferryLayers": 1,
+      "flowerAnimations": 2,
+      "characterAnimations": 1,
+      "voices": {
+        "created": 2,
+        "active": 2,
+        "max": 2
+      }
+    },
+    {
+      "minute": 9,
+      "elapsed": 540181,
+      "heap": 3355200,
+      "coffee": true,
+      "ui": 0,
+      "images": true,
+      "nodes": 67,
+      "animations": 32,
+      "heroLife": 1,
+      "birdLayers": 1,
+      "ferryLayers": 1,
+      "flowerAnimations": 2,
+      "characterAnimations": 1,
+      "voices": {
+        "created": 2,
+        "active": 2,
+        "max": 2
+      }
+    },
+    {
+      "minute": 10,
+      "elapsed": 600189,
+      "heap": 3335172,
+      "coffee": true,
+      "ui": 0,
+      "images": true,
+      "nodes": 67,
+      "animations": 33,
+      "heroLife": 1,
+      "birdLayers": 1,
+      "ferryLayers": 1,
+      "flowerAnimations": 2,
+      "characterAnimations": 1,
+      "voices": {
+        "created": 2,
+        "active": 2,
+        "max": 2
+      }
+    }
+  ],
+  "pass": true
+}

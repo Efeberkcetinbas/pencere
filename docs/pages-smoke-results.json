@@ -1,0 +1,12 @@
+{
+  "rootHero": true,
+  "images": true,
+  "favicon": "./favicon.svg",
+  "audioRequests": [
+    "http://127.0.0.1:4180/pencere/audio/city.mp3",
+    "http://127.0.0.1:4180/pencere/audio/sea.mp3"
+  ],
+  "errors": [],
+  "bad": [],
+  "pass": true
+}
