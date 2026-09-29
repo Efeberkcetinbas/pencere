@@ -1,5 +1,13 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react'
-import { assetUrl, type ForegroundTheme, type Quality, type Scene, type SceneLayer, type SceneVariant } from '../types/scene'
+import { assetUrl, type CouplePreset, type ForegroundTheme, type Quality, type Scene, type SceneLayer, type SceneVariant } from '../types/scene'
+
+const coupleAssets: Record<CouplePreset, string> = {
+  hero: 'hero-people-flowers',
+  window: 'couple-window',
+  terrace: 'couple-terrace',
+  night: 'couple-night',
+  rooftop: 'couple-rooftop',
+}
 
 function RandomSprite({ kind, quality }: { kind: 'birds' | 'ferry'; quality: Quality }) {
   const ref = useRef<HTMLElement>(null)
@@ -71,16 +79,16 @@ export function SceneArt({ scene, variant, foreground, quality, onReady }: { sce
       .catch(() => { if (!cancelled) { clearTimeout(timeout); setFailed(true); onReady(true) } })
     return () => { cancelled = true; clearTimeout(timeout) }
   }, [onReady])
-  const heroLife = scene.id === 'istanbul-maiden-tower' && foreground === 'balcony'
+  const coupleAsset = assetUrl(`layers/${coupleAssets[scene.couplePreset]}.webp`)
   return <div ref={ref} className={`scene-art quality-${quality} ${failed ? 'art-failed' : ''}`} role="img" aria-label={`${scene.city}, ${scene.title}, ${variant.label}`}>
     <picture className="scene-picture"><source srcSet={assetUrl(variant.artwork + '.avif')} type="image/avif" /><img className="scene-background" src={assetUrl(variant.artwork + '.webp')} alt="" style={{objectPosition:`${scene.focalPoint[0]}% ${scene.focalPoint[1]}%`}} /></picture>
     {scene.layers.map(layer => <Layer key={layer.id} layer={layer} quality={quality} />)}
     {foreground !== 'none' && <img className={`foreground-art foreground-${foreground}`} src={assetUrl(`layers/${foreground}.png`)} alt="" />}
-    {heroLife && <div className="hero-life-group" data-testid="hero-life" aria-hidden="true">
-      <img className="hero-life hero-life-base" src={assetUrl('layers/hero-people-flowers.webp')} alt="" />
-      <img className="hero-life hero-people-motion" src={assetUrl('layers/hero-people-flowers.webp')} alt="" />
-      <img className="hero-life hero-flowers-left" src={assetUrl('layers/hero-people-flowers.webp')} alt="" />
-      <img className="hero-life hero-flowers-right" src={assetUrl('layers/hero-people-flowers.webp')} alt="" />
+    {foreground !== 'none' && <div className={`couple-group couple-${scene.couplePreset} couple-scene-${scene.id}`} data-testid="couple-layer" data-preset={scene.couplePreset} aria-hidden="true">
+      <img className="couple-art couple-base" src={coupleAsset} alt="" />
+      <img className="couple-art couple-people-motion" src={coupleAsset} alt="" />
+      <img className="couple-art couple-flower-a" src={coupleAsset} alt="" />
+      <img className="couple-art couple-flower-b" src={coupleAsset} alt="" />
     </div>}
     <div className="vignette" />
   </div>

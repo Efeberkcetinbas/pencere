@@ -4,7 +4,7 @@ Telefonu yatay çevirip masaya bıraktığınızda yaşayan küçük bir dijital
 
 ## Deneyim
 
-- Kız Kulesi hero sahnesinde iki yetişkin karakter, mavi çiçekler, yavaş vapur, seyrek martılar, bulut, su yansımaları, şehir ışıkları ve kahve buharı
+- Tüm 10 sahnede aynı yetişkin çiftin ortama göre uyarlanmış doğal kompozisyonu; uygun sahnelerde mavi çiçekler
 - Kullanıcı etkileşiminden sonra başlayan, sahne geçişlerinde crossfade yapan yerel CC0 ortam sesleri
 - Yaklaşık 3 saniyede kaybolan minimal kontroller
 - Wake Lock kullanan, görünür çıkış kontrollü Coffee Mode

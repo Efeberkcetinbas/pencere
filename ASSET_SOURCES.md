@@ -190,8 +190,8 @@ Bu kayıt dağıtılan üçüncü taraf asset’leri ve yalnızca gerçek dünya
 
 ## Özgün üretimler
 
-- Scene: All scenes and hero foreground
-- Asset: 10 backgrounds, four architectural foregrounds, ferry/gull/balloon/cloud sprites, hero adult characters and blue flowers
+- Scene: All scenes and character foregrounds
+- Asset: 10 backgrounds, four architectural foregrounds, ferry/gull/balloon/cloud sprites, five consistent adult-couple composition layers and blue flowers
 - Source: OpenAI built-in image generation, directed and post-processed for this project
 - Original URL: Not applicable
 - Creator: Project-specific generated artwork

@@ -28,7 +28,7 @@ await page.waitForSelector('.viewer.is-ready')
 await page.getByRole('button',{name:'Ortam sesini aç'}).click()
 await page.waitForTimeout(800)
 const result={
- rootHero:await page.locator('[data-testid="hero-life"]').count()===1,
+ rootHero:await page.locator('[data-testid="couple-layer"][data-preset="hero"]').count()===1,
  images:await page.locator('img').evaluateAll(images=>images.every(image=>image.complete&&image.naturalWidth>0)),
  favicon:await page.locator('link[rel="icon"]').getAttribute('href'),
  audioRequests:audio,

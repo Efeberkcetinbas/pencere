@@ -42,5 +42,21 @@
   {
     "id": "hero-people-flowers",
     "bytes": 138268
+  },
+  {
+    "id": "couple-window",
+    "bytes": 65304
+  },
+  {
+    "id": "couple-terrace",
+    "bytes": 205250
+  },
+  {
+    "id": "couple-night",
+    "bytes": 102884
+  },
+  {
+    "id": "couple-rooftop",
+    "bytes": 72168
   }
 ]

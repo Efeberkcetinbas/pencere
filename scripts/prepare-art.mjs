@@ -28,6 +28,10 @@ for(const [id,x,y,w,h,width] of crops){
 }
 await sharp('art/originals/hero-people-flowers-v1.png').resize(480,270,{fit:'fill',kernel:'nearest'}).resize(960,540,{kernel:'nearest'}).webp({lossless:true,effort:6}).toFile('public/layers/hero-people-flowers.webp')
 report.push({id:'hero-people-flowers',bytes:(await fs.stat('public/layers/hero-people-flowers.webp')).size})
+for(const [id,file] of [['couple-window','couple-window-rain-v1'],['couple-terrace','couple-terrace-v1'],['couple-night','couple-night-v1'],['couple-rooftop','couple-rooftop-v1']]){
+ await sharp(`art/originals/${file}.png`).resize(480,270,{fit:'fill',kernel:'nearest'}).resize(960,540,{kernel:'nearest'}).webp({lossless:true,effort:6}).toFile(`public/layers/${id}.webp`)
+ report.push({id,bytes:(await fs.stat(`public/layers/${id}.webp`)).size})
+}
 await fs.writeFile('docs/asset-sizes.json',JSON.stringify(report,null,2))
 console.log(report)
 
