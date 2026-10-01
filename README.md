@@ -1,6 +1,6 @@
 # Pencere — Final V1
 
-Telefonu yatay çevirip masaya bıraktığınızda yaşayan küçük bir dijital pencereye dönüşen, 10 özgün pixel-art manzaralı ambient web deneyimi. Ana URL doğrudan İstanbul / Kız Kulesi gün batımı sahnesini açar; manzara seçici ikincil ekrandır.
+Telefon ekranını yaşayan küçük bir dijital pencereye dönüştüren, dikey mobil kullanım için optimize edilmiş 10 özgün pixel-art manzaralı ambient web deneyimi. Ana URL doğrudan İstanbul / Kız Kulesi gün batımı sahnesini açar; manzara seçici ikincil ekrandır.
 
 ## Deneyim
 
@@ -9,7 +9,7 @@ Telefonu yatay çevirip masaya bıraktığınızda yaşayan küçük bir dijital
 - Yaklaşık 3 saniyede kaybolan minimal kontroller
 - Wake Lock kullanan, görünür çıkış kontrollü Coffee Mode
 - Favoriler, son görüntülenenler, kalite/foreground/atmosfer seçenekleri ve kişisel manzara bağlantısı
-- Portrait desteği; 667×375, 844×390 ve 932×430 yatay telefonlar öncelikli
+- Dikey mobil öncelikli responsive kompozisyon; fullscreen ve yatay görünüm graceful fallback olarak desteklenir
 
 ## Teknoloji ve mimari
 

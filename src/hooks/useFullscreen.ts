@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 type LockableOrientation = ScreenOrientation & {
-  lock?: (orientation: 'landscape') => Promise<void>
+  lock?: (orientation: 'portrait') => Promise<void>
   unlock?: () => void
 }
 
@@ -54,7 +54,7 @@ export function useFullscreen() {
       }
       if (element.requestFullscreen) await element.requestFullscreen()
       else await element.webkitRequestFullscreen?.()
-      try { await orientation?.lock?.('landscape') } catch { /* Lock is optional, especially on iOS Safari. */ }
+      try { await orientation?.lock?.('portrait') } catch { /* Lock is optional, especially on iOS Safari. */ }
     } catch {
       // iOS and embedded browsers may reject native fullscreen; fixed immersive mode remains available.
       setImmersive(true)

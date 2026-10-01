@@ -8,7 +8,6 @@ import { Controls } from './Controls'
 import { LoadingScreen } from './LoadingScreen'
 import { PersonalMessage } from './PersonalMessage'
 import { SceneArt } from './SceneArt'
-import { usePortraitHint } from '../hooks/usePortraitHint'
 import { useViewportLayout } from '../hooks/useViewportLayout'
 interface Props { scene: Scene; favorite: boolean; special?: boolean; message?: string; audio: AmbientAudio; onBack: () => void; onFavorite: () => void }
 export function SceneViewer({ scene, favorite, special=false, message, audio, onBack, onFavorite }: Props) {
@@ -26,7 +25,6 @@ export function SceneViewer({ scene, favorite, special=false, message, audio, on
   const fullscreen = useFullscreen()
   const viewport = useViewportLayout()
   const wake = useWakeLock(coffee)
-  const portraitHint = usePortraitHint()
   const ready = useCallback((error: boolean) => { setFailed(error); setLoading(false) }, [])
   useEffect(() => {
     const visibility = () => root.current?.classList.toggle('is-paused', document.hidden)
@@ -54,7 +52,6 @@ export function SceneViewer({ scene, favorite, special=false, message, audio, on
       onBack={onBack} onFavorite={onFavorite} onCoffee={enterCoffee} onFullscreen={fullscreen.toggle} onVariant={changeVariant} onForeground={setForeground} />}
     {coffee && <div className={`coffee-controls ${visible ? 'is-visible' : ''}`}><span>{wake.active ? 'Ekran açık tutuluyor' : 'Kahve zamanı'}</span><button onClick={() => {setCoffee(false);reveal()}}>Kahve modundan çık</button></div>}
     {clock && <time className="scene-clock">{time.toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'})}</time>}
-    {portraitHint && !coffee && !special && !loading && <p className="portrait-hint">Yatay görünümde daha güzel.</p>}
     {!loading && special && message !== '' && <PersonalMessage key={variant.id} text={message || 'Bunu görünce aklıma sen geldin.'} />}
     {failed && <p className="asset-notice" role="status">Manzara yüklenemedi. Bağlantını kontrol edip yeniden deneyebilirsin. <button onClick={() => location.reload()}>Yeniden dene</button></p>}
     {loading && <LoadingScreen city={scene.city} />}

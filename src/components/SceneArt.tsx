@@ -19,7 +19,7 @@ function RandomSprite({ kind, quality }: { kind: 'birds' | 'ferry'; quality: Qua
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)')
     const schedule = () => {
       if (disposed || document.hidden || reduced.matches || quality === 'low') return
-      const delay = kind === 'birds' ? 20000 + Math.random() * 40000 : 45000 + Math.random() * 45000
+      const delay = kind === 'birds' ? 12000 + Math.random() * 14000 : 35000 + Math.random() * 35000
       timer = setTimeout(run, delay)
     }
     const run = () => {
@@ -33,7 +33,7 @@ function RandomSprite({ kind, quality }: { kind: 'birds' | 'ferry'; quality: Qua
           bird.style.translate = `${index * 13}px ${index % 2 ? 7 : 0}px`
         })
       }
-      const duration = kind === 'ferry' ? 60000 + Math.random() * 30000 : 18000 + Math.random() * 7000
+      const duration = kind === 'ferry' ? 55000 + Math.random() * 25000 : 14000 + Math.random() * 6000
       animation = el.animate([
         { transform: `translateX(${direction > 0 ? -15 : 110}vw) scaleX(${direction})`, opacity: 0 },
         { opacity: .8, offset: .1 },
@@ -46,7 +46,7 @@ function RandomSprite({ kind, quality }: { kind: 'birds' | 'ferry'; quality: Qua
     document.addEventListener('visibilitychange', visibility)
     reduced.addEventListener('change', visibility)
     // Initial ferry is already far out, then passes are spaced and randomized.
-    timer = setTimeout(run, kind === 'ferry' ? 6000 : 24000)
+    timer = setTimeout(run, kind === 'ferry' ? 6000 : 2500)
     if (quality === 'low' || reduced.matches) clearTimeout(timer)
     return () => { disposed = true; clearTimeout(timer); animation?.cancel(); document.removeEventListener('visibilitychange', visibility); reduced.removeEventListener('change', visibility) }
   }, [kind, quality])
@@ -58,7 +58,7 @@ function Layer({ layer, quality }: { layer: SceneLayer; quality: Quality }) {
   switch (layer.kind) {
     case 'image': return <img className="image-layer" src={assetUrl(layer.src!)} alt="" style={{ ...style, top: `${layer.top ?? 0}%`, left: `${layer.left ?? 0}%`, width: `${layer.width ?? 100}%` }} />
     case 'birds': case 'ferry': return <RandomSprite kind={layer.kind} quality={quality} />
-    case 'balloons': return <div className="balloon-layer" style={style}>{[0,1,2,3,4].map(i => <img key={i} src={assetUrl('layers/balloon.png')} alt="" style={{ left: `${22+i*13}%`, top: `${9+(i%3)*8}%`, width: `${2+(i%3)*1.4}%`, animationDelay: `-${i*9}s` }} />)}</div>
+    case 'balloons': return <div className="balloon-layer" style={style}>{[0,1,2,3,4].map(i => <img key={i} src={assetUrl('layers/balloon.png')} alt="" style={{ left: `${16+i*16}%`, top: `${8+(i%3)*9}%`, width: `${2.5+(i%3)*1.4}%`, animationDelay: `-${i*7}s`, animationDuration: `${28+i*5}s` }} />)}</div>
     case 'clouds': return <div className="cloud-layer" style={style}><img src={assetUrl('layers/cloud.png')} alt="" /></div>
     case 'rain': return <div className="rain-layer" style={style}>{Array.from({length: quality === 'low' ? 6 : quality === 'high' ? 24 : 14}, (_, i) => <i key={i} style={{ left:`${(i*37)%100}%`, top:`${(i*17)%70}%`, animationDelay:`-${i*2.3}s`, animationDuration:`${9+i%7}s` }} />)}</div>
     case 'water': return <div className="water-shimmer" style={style}>{Array.from({length:quality === 'low' ? 8 : 24}, (_, i) => <i key={i} style={{left:`${(i*31)%100}%`,top:`${(i*19)%100}%`,width:`${2+i%5}%`,animationDelay:`-${i*1.7}s`}} />)}</div>
@@ -87,8 +87,13 @@ export function SceneArt({ scene, variant, foreground, quality, onReady }: { sce
     {foreground !== 'none' && <div className={`couple-group couple-${scene.couplePreset} couple-scene-${scene.id}`} data-testid="couple-layer" data-preset={scene.couplePreset} aria-hidden="true">
       <img className="couple-art couple-base" src={coupleAsset} alt="" />
       <img className="couple-art couple-people-motion" src={coupleAsset} alt="" />
+      <img className="couple-art couple-hair-motion" src={coupleAsset} alt="" />
       <img className="couple-art couple-flower-a" src={coupleAsset} alt="" />
       <img className="couple-art couple-flower-b" src={coupleAsset} alt="" />
+      <div className="portrait-garden">
+        <img className="portrait-flowers portrait-flowers-left" src={assetUrl('layers/blue-flowers-left.webp')} alt="" />
+        <img className="portrait-flowers portrait-flowers-right" src={assetUrl('layers/blue-flowers-right.webp')} alt="" />
+      </div>
     </div>}
     <div className="vignette" />
   </div>

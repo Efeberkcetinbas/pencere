@@ -35,6 +35,13 @@ test('all scenes: decode, sound, favorites, settings, fullscreen, coffee, exit, 
   for(const [width,height] of [[1920,1080],[375,667],[390,844],[430,932],[667,375],[844,390],[932,430]]){
    await page.setViewportSize({width,height})
    expect(await page.evaluate(()=>({x:document.documentElement.scrollWidth-innerWidth,y:document.documentElement.scrollHeight-innerHeight}))).toEqual({x:0,y:0})
+   if(width===390&&height===844){
+    await expect(page.locator('.portrait-garden')).toBeVisible()
+    await expect(page.locator('.portrait-flowers')).toHaveCount(2)
+    expect(await page.locator('.portrait-flowers').evaluateAll(flowers=>flowers.every(f=>{const box=f.getBoundingClientRect();return box.width>0&&box.height>0&&box.top<innerHeight&&box.bottom>0&&box.right>0&&box.left<innerWidth}))).toBe(true)
+    expect(await page.locator('.couple-people-motion').evaluate(el=>getComputedStyle(el).animationName)).toContain('couple-breathe')
+    expect(await page.locator('.couple-hair-motion').evaluate(el=>getComputedStyle(el).animationName)).toContain('hair-breeze')
+   }
   }
   await page.mouse.move(100,110)
   await page.getByRole('button',{name:'Manzara değiştir'}).click()
@@ -57,6 +64,21 @@ test('root opens the complete hero scene and picker stays secondary',async({page
  await page.mouse.click(120,80)
  await page.getByRole('button',{name:'Manzara değiştir'}).click()
  await expect(page.locator('.picker')).toBeVisible()
+})
+test('birds and Cappadocia balloons have active ambient motion',async({page})=>{
+ await page.goto('/')
+ await expect(page.locator('.viewer')).toHaveClass(/is-ready/)
+ await expect(page.locator('.sprite-birds img')).toHaveCount(3)
+ expect(await page.locator('.sprite-birds img').first().evaluate(el=>getComputedStyle(el).animationName)).toContain('bird-flutter')
+ await page.waitForTimeout(2900)
+ expect(await page.locator('.sprite-birds').evaluate(el=>el.getAnimations().length)).toBeGreaterThan(0)
+ await page.goto('/#/scene/cappadocia')
+ await expect(page.locator('.viewer')).toHaveClass(/is-ready/)
+ await expect(page.locator('.balloon-layer img')).toHaveCount(5)
+ const before=await page.locator('.balloon-layer img').first().evaluate(el=>getComputedStyle(el).translate)
+ await page.waitForTimeout(350)
+ const after=await page.locator('.balloon-layer img').first().evaluate(el=>getComputedStyle(el).translate)
+ expect(after).not.toBe(before)
 })
 test('visual viewport drives portrait, landscape and fullscreen layout transitions',async({page})=>{
  test.setTimeout(90000)

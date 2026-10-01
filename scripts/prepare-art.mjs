@@ -28,6 +28,9 @@ for(const [id,x,y,w,h,width] of crops){
 }
 await sharp('art/originals/hero-people-flowers-v1.png').resize(480,270,{fit:'fill',kernel:'nearest'}).resize(960,540,{kernel:'nearest'}).webp({lossless:true,effort:6}).toFile('public/layers/hero-people-flowers.webp')
 report.push({id:'hero-people-flowers',bytes:(await fs.stat('public/layers/hero-people-flowers.webp')).size})
+await sharp('public/layers/hero-people-flowers.webp').extract({left:0,top:385,width:300,height:155}).webp({lossless:true,effort:6}).toFile('public/layers/blue-flowers-left.webp')
+await sharp('public/layers/hero-people-flowers.webp').extract({left:815,top:385,width:145,height:155}).webp({lossless:true,effort:6}).toFile('public/layers/blue-flowers-right.webp')
+report.push({id:'blue-flowers-left',bytes:(await fs.stat('public/layers/blue-flowers-left.webp')).size},{id:'blue-flowers-right',bytes:(await fs.stat('public/layers/blue-flowers-right.webp')).size})
 for(const [id,file] of [['couple-window','couple-window-rain-v1'],['couple-terrace','couple-terrace-v1'],['couple-night','couple-night-v1'],['couple-rooftop','couple-rooftop-v1']]){
  await sharp(`art/originals/${file}.png`).resize(480,270,{fit:'fill',kernel:'nearest'}).resize(960,540,{kernel:'nearest'}).webp({lossless:true,effort:6}).toFile(`public/layers/${id}.webp`)
  report.push({id,bytes:(await fs.stat(`public/layers/${id}.webp`)).size})
