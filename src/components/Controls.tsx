@@ -4,7 +4,7 @@ import type { AmbientAudio } from '../hooks/useAmbientAudio'
 import { Icon } from './Icon'
 import { Credits } from './Credits'
 interface Props {
- scene:Scene;visible:boolean;favorite:boolean;audio:AmbientAudio;variant:SceneVariant;foreground:ForegroundTheme;settings:boolean;quality:Quality;clock:boolean;
+ scene:Scene;visible:boolean;favorite:boolean;audio:AmbientAudio;variant:SceneVariant;foreground:ForegroundTheme;settings:boolean;quality:Quality;clock:boolean;fullscreen:boolean;
  onBack:()=>void;onFavorite:()=>void;onCoffee:()=>void;onFullscreen:()=>void;onSettings:(v:boolean)=>void;onClock:(v:boolean)=>void;onQuality:(v:Quality)=>void;
  onVariant:(v:SceneVariant)=>void;onForeground:(v:ForegroundTheme)=>void;
 }
@@ -19,7 +19,7 @@ export function Controls(p:Props){
  return <><div className={`scene-ui ${p.visible?'is-visible':''}`} inert={!p.visible}>
    <div className="scene-topbar">{button('Manzara değiştir','back',p.onBack)}<div className="scene-heading"><span>{p.scene.city} · {p.variant.label}</span><strong>{p.scene.title}</strong></div>{button(p.favorite?'Favorilerden çıkar':'Favoriye ekle','bookmark',p.onFavorite,p.favorite)}</div>
    <div className="scene-bottombar"><div className="control-cluster">{button(p.audio.enabled?'Ortam sesini kapat':'Ortam sesini aç',p.audio.enabled?'sound':'mute',p.audio.toggle,p.audio.enabled)}<span className="sound-caption">{p.audio.error?'Ses yüklenemedi':p.audio.enabled?'Şehrin sesi':'Sesi aç'}</span></div>
-   <div className="control-cluster">{button('Kahve modu','coffee',p.onCoffee)}{button('Tam ekran','expand',p.onFullscreen)}{button('Ayarlar','sliders',()=>p.onSettings(true))}</div></div>
+   <div className="control-cluster">{button('Kahve modu','coffee',p.onCoffee)}{button(p.fullscreen?'Tam ekrandan çık':'Tam ekran','expand',p.onFullscreen,p.fullscreen)}{button('Ayarlar','sliders',()=>p.onSettings(true))}</div></div>
  </div>
  <dialog ref={dialog} className="settings-dialog" onCancel={()=>p.onSettings(false)} onClick={e=>{if(e.target===dialog.current)p.onSettings(false)}}><div className="settings-content">
  <div className="dialog-heading"><h2>Manzaranı ayarla</h2>{button('Ayarları kapat','close',()=>p.onSettings(false))}</div>

@@ -23,7 +23,7 @@ export function SceneViewer({ scene, favorite, special=false, message, audio, on
   const [time, setTime] = useState(new Date())
   const root = useRef<HTMLElement>(null)
   const { visible, reveal } = useAutoHideUI(3000, settings)
-  const fullscreen = useFullscreen(root)
+  const fullscreen = useFullscreen()
   const viewport = useViewportLayout()
   const wake = useWakeLock(coffee)
   const portraitHint = usePortraitHint()
@@ -50,7 +50,7 @@ export function SceneViewer({ scene, favorite, special=false, message, audio, on
   }} onKeyDown={event => { if(event.key==='Escape') { setSettings(false); if(coffee) setCoffee(false) } }}>
     <SceneArt key={variant.id} scene={scene} variant={variant} foreground={foreground} quality={quality} onReady={ready} />
     {!coffee && <Controls scene={scene} visible={visible} favorite={favorite} audio={audio} variant={variant} foreground={foreground}
-      settings={settings} quality={quality} clock={clock} onClock={setClock} onQuality={setQuality} onSettings={setSettings}
+      settings={settings} quality={quality} clock={clock} fullscreen={fullscreen.active} onClock={setClock} onQuality={setQuality} onSettings={setSettings}
       onBack={onBack} onFavorite={onFavorite} onCoffee={enterCoffee} onFullscreen={fullscreen.toggle} onVariant={changeVariant} onForeground={setForeground} />}
     {coffee && <div className={`coffee-controls ${visible ? 'is-visible' : ''}`}><span>{wake.active ? 'Ekran açık tutuluyor' : 'Kahve zamanı'}</span><button onClick={() => {setCoffee(false);reveal()}}>Kahve modundan çık</button></div>}
     {clock && <time className="scene-clock">{time.toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'})}</time>}

@@ -1,28 +1,45 @@
-import { useEffect, useState, type RefObject } from 'react'
+import { useEffect, useState } from 'react'
 
 type LockableOrientation = ScreenOrientation & {
   lock?: (orientation: 'landscape') => Promise<void>
   unlock?: () => void
 }
 
-export function useFullscreen(target: RefObject<HTMLElement | null>) {
-  const [nativeActive, setNativeActive] = useState(Boolean(document.fullscreenElement))
+type WebkitFullscreenDocument = Document & {
+  webkitFullscreenElement?: Element | null
+  webkitExitFullscreen?: () => Promise<void> | void
+}
+
+type WebkitFullscreenElement = HTMLElement & {
+  webkitRequestFullscreen?: () => Promise<void> | void
+}
+
+const fullscreenElement = () => document.fullscreenElement ?? (document as WebkitFullscreenDocument).webkitFullscreenElement ?? null
+
+export function useFullscreen() {
+  const [nativeActive, setNativeActive] = useState(Boolean(fullscreenElement()))
   const [immersive, setImmersive] = useState(false)
   useEffect(() => {
     const onChange = () => {
-      const active = Boolean(document.fullscreenElement)
+      const active = Boolean(fullscreenElement())
       setNativeActive(active)
       if (active) setImmersive(false)
     }
     document.addEventListener('fullscreenchange', onChange)
-    return () => document.removeEventListener('fullscreenchange', onChange)
+    document.addEventListener('webkitfullscreenchange', onChange)
+    return () => {
+      document.removeEventListener('fullscreenchange', onChange)
+      document.removeEventListener('webkitfullscreenchange', onChange)
+    }
   }, [])
 
   const toggle = async () => {
     const orientation = window.screen.orientation as LockableOrientation | undefined
     try {
-      if (document.fullscreenElement) {
-        await document.exitFullscreen()
+      if (fullscreenElement()) {
+        const webkitDocument = document as WebkitFullscreenDocument
+        if (document.exitFullscreen) await document.exitFullscreen()
+        else await webkitDocument.webkitExitFullscreen?.()
         orientation?.unlock?.()
         return
       }
@@ -30,12 +47,13 @@ export function useFullscreen(target: RefObject<HTMLElement | null>) {
         setImmersive(false)
         return
       }
-      const element = target.current ?? document.documentElement
-      if (!element.requestFullscreen) {
+      const element = document.documentElement as WebkitFullscreenElement
+      if (!element.requestFullscreen && !element.webkitRequestFullscreen) {
         setImmersive(true)
         return
       }
-      await element.requestFullscreen()
+      if (element.requestFullscreen) await element.requestFullscreen()
+      else await element.webkitRequestFullscreen?.()
       try { await orientation?.lock?.('landscape') } catch { /* Lock is optional, especially on iOS Safari. */ }
     } catch {
       // iOS and embedded browsers may reject native fullscreen; fixed immersive mode remains available.
