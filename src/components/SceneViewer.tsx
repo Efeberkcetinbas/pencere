@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState, type CSSProperties } from 'react'
 import type { ForegroundTheme, Quality, Scene, SceneVariant } from '../types/scene'
 import type { AmbientAudio } from '../hooks/useAmbientAudio'
 import { useAutoHideUI } from '../hooks/useAutoHideUI'
@@ -9,6 +9,7 @@ import { LoadingScreen } from './LoadingScreen'
 import { PersonalMessage } from './PersonalMessage'
 import { SceneArt } from './SceneArt'
 import { usePortraitHint } from '../hooks/usePortraitHint'
+import { useViewportLayout } from '../hooks/useViewportLayout'
 interface Props { scene: Scene; favorite: boolean; special?: boolean; message?: string; audio: AmbientAudio; onBack: () => void; onFavorite: () => void }
 export function SceneViewer({ scene, favorite, special=false, message, audio, onBack, onFavorite }: Props) {
   const [variant, setVariant] = useState<SceneVariant>(scene.variants[0])
@@ -22,7 +23,8 @@ export function SceneViewer({ scene, favorite, special=false, message, audio, on
   const [time, setTime] = useState(new Date())
   const root = useRef<HTMLElement>(null)
   const { visible, reveal } = useAutoHideUI(3000, settings)
-  const fullscreen = useFullscreen()
+  const fullscreen = useFullscreen(root)
+  const viewport = useViewportLayout()
   const wake = useWakeLock(coffee)
   const portraitHint = usePortraitHint()
   const ready = useCallback((error: boolean) => { setFailed(error); setLoading(false) }, [])
@@ -38,9 +40,13 @@ export function SceneViewer({ scene, favorite, special=false, message, audio, on
   }, [clock])
   const changeVariant = (next: SceneVariant) => { setLoading(true); setFailed(false); setVariant(next) }
   const enterCoffee = () => { setCoffee(true); setSettings(false) }
-  return <main ref={root} className={`viewer ${coffee ? 'coffee-mode' : ''} ${loading ? 'is-loading' : 'is-ready'}`} onPointerMove={event => {
+  return <main ref={root}
+    className={`viewer ${coffee ? 'coffee-mode' : ''} ${loading ? 'is-loading' : 'is-ready'} ${viewport.isLandscape ? 'is-landscape' : 'is-portrait'} ${viewport.isCompactLandscape ? 'is-compact-landscape' : ''} ${fullscreen.immersive ? 'is-immersive' : ''}`}
+    style={{'--viewport-width':`${viewport.width}px`,'--viewport-height':`${viewport.height}px`} as CSSProperties}
+    data-viewport-width={viewport.width} data-viewport-height={viewport.height} data-screen-orientation={viewport.screenOrientation} data-fullscreen={fullscreen.active}
+    onPointerMove={event => {
     if (quality !== 'high' || event.pointerType !== 'mouse' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    root.current?.style.setProperty('--parallax', `${(event.clientX / innerWidth - .5) * 3}px`)
+    root.current?.style.setProperty('--parallax', `${(event.clientX / viewport.width - .5) * 3}px`)
   }} onKeyDown={event => { if(event.key==='Escape') { setSettings(false); if(coffee) setCoffee(false) } }}>
     <SceneArt key={variant.id} scene={scene} variant={variant} foreground={foreground} quality={quality} onReady={ready} />
     {!coffee && <Controls scene={scene} visible={visible} favorite={favorite} audio={audio} variant={variant} foreground={foreground}

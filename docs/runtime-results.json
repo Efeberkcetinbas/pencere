@@ -90,12 +90,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 9820,
+                  "duration": 15727,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-09-29T12:16:01.704Z",
+                  "startTime": "2026-10-01T17:18:03.611Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -124,12 +124,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 4569,
+                  "duration": 4496,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-09-29T12:16:12.033Z",
+                  "startTime": "2026-10-01T17:18:19.736Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -139,7 +139,75 @@
           ],
           "id": "7324964a6aa193ebd049-51ef343e3e5d8124e2c8",
           "file": "release.spec.ts",
-          "line": 43,
+          "line": 45,
+          "column": 1
+        },
+        {
+          "title": "visual viewport drives portrait, landscape and fullscreen layout transitions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1483,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T17:18:24.250Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7324964a6aa193ebd049-7d88ba975043f3731702",
+          "file": "release.spec.ts",
+          "line": 61,
+          "column": 1
+        },
+        {
+          "title": "immersive fallback stays responsive when native fullscreen is unavailable",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 850,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T17:18:25.750Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7324964a6aa193ebd049-0e8aeb74ffe0a7e4eeae",
+          "file": "release.spec.ts",
+          "line": 109,
           "column": 1
         },
         {
@@ -158,12 +226,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 5112,
+                  "duration": 5755,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-09-29T12:16:16.614Z",
+                  "startTime": "2026-10-01T17:18:26.624Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -173,7 +241,7 @@
           ],
           "id": "7324964a6aa193ebd049-2e55f06cc03a9d07ccba",
           "file": "release.spec.ts",
-          "line": 58,
+          "line": 130,
           "column": 1
         }
       ]
@@ -181,9 +249,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-09-29T12:16:01.325Z",
-    "duration": 20601.464,
-    "expected": 3,
+    "startTime": "2026-10-01T17:18:02.821Z",
+    "duration": 29982.673,
+    "expected": 5,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0
